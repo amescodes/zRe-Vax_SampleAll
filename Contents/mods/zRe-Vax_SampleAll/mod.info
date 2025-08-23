@@ -1,7 +1,9 @@
-name=Mod Template
-id=ModTemplate
-description=This is an example mod.
+name=zRe Vaccine 2.0 Add-on - Sample All
+id=zRe-Vax_SampleAll
+require=zReModVaccin20byk
+description=Adds an option to sample all the valid corpses in the menu.
 poster=poster.png
+poster=sampleall.png
 url=https://github.com/amescodes/zRe-Vax_SampleAll
 versionMin=41.78.16
 authors=amescodes
