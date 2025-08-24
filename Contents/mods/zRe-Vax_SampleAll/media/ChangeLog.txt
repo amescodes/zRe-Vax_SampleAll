@@ -3,6 +3,10 @@
 - Add support for Chuckleberry Finn Mod Update and Alert system.
 [ ------ ]
 
+[ 8/24/25 ]
+- Fix bug that allowed exploit for multiple samples from a single corpse.
+[ ------ ]
+
 [ ALERT_CONFIG ]
 link1 = Buymeacoffee = https://steamcommunity.com/linkfilter/?u=https://buymeacoffee.com/amescodes,
 link2 = Workshop = https://steamcommunity.com/id/ames_games/myworkshopfiles/?appid=108600,
