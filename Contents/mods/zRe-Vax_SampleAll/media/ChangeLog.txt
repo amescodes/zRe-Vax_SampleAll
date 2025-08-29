@@ -7,8 +7,16 @@
 - Fix exploit that allowed for multiple samples from a single corpse.
 [ ------ ]
 
+[ 8/27/25 ]
+- Fix bug where corpses that weren't autopsied weren't removed from queue when the timed action never started.
+- Remove "Sample All" option when only one corpse is in the menu.
+- Better compatibility with base mod.
+- Add Ko-fi support link to Mod Update and Alert system.
+[ ------ ]
+
 [ ALERT_CONFIG ]
-link1 = Buymeacoffee = https://steamcommunity.com/linkfilter/?u=https://buymeacoffee.com/amescodes,
-link2 = Workshop = https://steamcommunity.com/id/ames_games/myworkshopfiles/?appid=108600,
-link3 = Github = https://steamcommunity.com/linkfilter/?u=https://github.com/amescodes/zRe-Vax_SampleAll
+link1 = Ko-fi = https://steamcommunity.com/linkfilter/?u=https://ko-fi.com/amescodes,
+link2 = Buymeacoffee = https://steamcommunity.com/linkfilter/?u=https://buymeacoffee.com/amescodes,
+link3 = Workshop = https://steamcommunity.com/id/ames_games/myworkshopfiles/?appid=108600,
+link4 = Github = https://steamcommunity.com/linkfilter/?u=https://github.com/amescodes/zRe-Vax_SampleAll
 [ ------ ]

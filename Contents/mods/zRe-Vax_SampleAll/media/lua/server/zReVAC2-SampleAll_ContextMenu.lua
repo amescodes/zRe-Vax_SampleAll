@@ -24,13 +24,13 @@ local function equipScalpel(weapon, primary, twoHands, playerObj, worldObjs)
     ISTimedActionQueue.add(SampleAllEquipScalpelAction:new(playerObj, weapon, 50, primary, twoHands,worldObjs));
 end
 
--- from zRe Vax 2.0
 local function predicateNotBroken(item)
     return not item:isBroken()
 end
 
 -- referenced from zRe Vax 2.0
 local function LabRecipes_WMOnCorpseAutopsyAll(player, worldobjects)
+    ISTimedActionQueue.clear(player);
     local inv = player:getInventory()
     local scalpel = inv:getFirstTypeEvalRecurse("Scalpel", predicateNotBroken)
     if scalpel and scalpel.isRequiresEquippedBothHands then
@@ -54,8 +54,6 @@ local function LabRecipes_WMOnCorpseAutopsyAll(player, worldobjects)
                                 if not (notFresh or notZombie or notOrgans or inQueue) and
                                     sampleAll_walkAdj(player, obj:getSquare(), worldobjects) then
                                     ISTimedActionQueue.add(SampleAll_LabActionMakeAutopsy:new(player, obj, square, nil, worldobjects))
-                                    obj:getModData().queued = true
-                                    obj:transmitModData()
                                 end
                             end
                         end
@@ -93,7 +91,9 @@ local function zreVaxSampleAll_AddSampleAllOption(playerNum, context, worldobjec
     if test and ISWorldObjectContextMenu.Test then
         return true
     end
+
     local player = getSpecificPlayer(playerNum)
+    
     local subMenu = nil
     local subMenuName = getText("ContextMenu_LabCorpseAutopsy")
     for i = 1, context.numOptions - 1 do
@@ -111,29 +111,36 @@ local function zreVaxSampleAll_AddSampleAllOption(playerNum, context, worldobjec
             local corpse = subMenuOption.param1
             -- check if in queue, make unavailable if true
             if corpse and instanceof(corpse, "IsoDeadBody") then
+                -- if isServer() then
+                -- else
+                -- end
                 if corpse:getModData().queued then
                     subMenuOption.notAvailable = true
                 end
             end
             -- if any are available, sample all is also
-            if not (subMenuOption.notAvailable) then
+            if notAvailable and not (subMenuOption.notAvailable) then
                 notAvailable = false
             end
         end
-        subMenu:addOptionOnTop(getText("ContextMenu_SampleAllCorpses"), player, LabRecipes_WMOnCorpseAutopsyAll, worldobjects)
-        local sampleAllOpt = subMenu.options[1]
-        if sampleAllOpt then
-            local tooltip = ISInventoryPaneContextMenu.addToolTip()
-            sampleAllOpt.toolTip = tooltip
-            tooltip.description = tooltip.description .. getText("ContextMenu_LabMustHaveItems")
 
-            local ok = true
-            local inv = player:getInventory()
-            ok = LabRecipes_CreateCheckTooltip(sampleAllOpt, inv, "Base", {"Scalpel"}, 1, true) and ok
-            ok = LabRecipes_CreateCheckTooltip(sampleAllOpt, inv, "Base", {"Tweezers"}, 1) and ok
-            sampleAllOpt.notAvailable = notAvailable or not (ok)
+        if subMenu.numOptions > 2 then 
+            subMenu:addOptionOnTop(getText("ContextMenu_SampleAllCorpses"), player, LabRecipes_WMOnCorpseAutopsyAll, worldobjects)
+            local sampleAllOpt = subMenu.options[1]
+            if sampleAllOpt then
+                local tooltip = ISInventoryPaneContextMenu.addToolTip()
+                sampleAllOpt.toolTip = tooltip
+                tooltip.description = tooltip.description .. getText("ContextMenu_LabMustHaveItems")
+
+                local ok = true
+                local inv = player:getInventory()
+                ok = LabRecipes_CreateCheckTooltip(sampleAllOpt, inv, "Base", {"Scalpel"}, 1, true) and ok
+                ok = LabRecipes_CreateCheckTooltip(sampleAllOpt, inv, "Base", {"Tweezers"}, 1) and ok
+                sampleAllOpt.notAvailable = notAvailable or not (ok)
+            end
         end
     end
 end
 
 Events.OnFillWorldObjectContextMenu.Add(zreVaxSampleAll_AddSampleAllOption)
+

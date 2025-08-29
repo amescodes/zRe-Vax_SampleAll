@@ -4,8 +4,7 @@ Adds an option to sample all the valid corpses in the menu.
 
 Thanks to Demonius, Ehue232v, Dr Reaper, and kERHUS for the original base mods.
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/amescodes)
-
+[![Support me on ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/E1E11KCLJV)
 -------
 Workshop ID: 3554773199
 Mod ID: zRe-Vax_SampleAll
